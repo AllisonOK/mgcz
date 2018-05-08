@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<paths>
+
+    <!--升级-->
+    <external-cache-path
+        name="mn_update_external_cache"
+        path="." />
+
+    <cache-path
+        name="mn_update_cache"
+        path="." />
+
+</paths>
