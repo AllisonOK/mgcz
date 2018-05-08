@@ -21,7 +21,7 @@ public class AllFunc {
 
 
     /**
-     * 保存base64字符串图片到本地 测试提交
+     * 保存base64字符串图片到本地
      * @param str
      */
     @JavascriptInterface
