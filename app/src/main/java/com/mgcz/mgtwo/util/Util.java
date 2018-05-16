@@ -78,7 +78,7 @@ public class Util {
                     fileOutputStream.flush();
                     //关流
                     fileOutputStream.close();
-                    syncAlbum(context, path);
+                    syncAlbum(context, path + "/mgcz_qr.jpg");
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

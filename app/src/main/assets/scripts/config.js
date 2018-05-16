@@ -4,7 +4,7 @@ if(loadingView)
     loadingView.loadingAutoClose=false;
 	loadingView.showTextInfo=false;
 	setTimeout(function(){
-	    loadingView.loading(100);
+	    loadingView.loading(50);
 	},2000);
     loadingView.bgColor("#ffffff");
     loadingView.setFontColor("#000000");

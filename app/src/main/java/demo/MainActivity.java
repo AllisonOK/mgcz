@@ -90,8 +90,8 @@ public class MainActivity extends Activity {
         mPlugin = new GameEngine(this);
         mPlugin.game_plugin_set_runtime_proxy(mProxy);
         mPlugin.game_plugin_set_option("localize", "false");
-//        mPlugin.game_plugin_set_option("gameUrl", "http://dream2test.mengguochengzhen.cn/index.html");
-        mPlugin.game_plugin_set_option("gameUrl", "http://dream2.mengguochengzhen.cn/index.html");
+        mPlugin.game_plugin_set_option("gameUrl", "http://10.17.18.20/index/index.html");
+//        mPlugin.game_plugin_set_option("gameUrl", "http://dream2.mengguochengzhen.cn/index.html");
         mPlugin.game_plugin_init(3);
         View gameView = mPlugin.game_plugin_get_view();
         this.setContentView(gameView);
@@ -316,11 +316,17 @@ public class MainActivity extends Activity {
 
     @PermissionYes(100)
     private void getSaveYes() {
-        Util.generateImage(MainActivity.this, mQrCodePic);
+        Boolean isSuccess = Util.generateImage(MainActivity.this, mQrCodePic);
+        if (isSuccess) {
+            ConchJNI.RunJS("isSave('1')");
+        } else {
+            ConchJNI.RunJS("isSave('0')");
+        }
     }
 
     @PermissionNo(100)
     private void getSaveNo() {
+        ConchJNI.RunJS("isSave('0')");
     }
 
 }

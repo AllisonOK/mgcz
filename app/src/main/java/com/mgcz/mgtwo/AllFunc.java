@@ -9,6 +9,7 @@ import com.mgcz.mgtwo.util.Util;
 import com.umeng.socialize.bean.SHARE_MEDIA;
 
 import demo.MainActivity;
+import layaair.game.browser.ConchJNI;
 
 /**
  * 所有方法调用的汇总
@@ -30,7 +31,12 @@ public class AllFunc {
             main.mQrCodePic = str;
             CheckPermissionUtils.checkStoragePermissions(main);
         } else {
-            Util.generateImage(main, str);
+            boolean isSuccess = Util.generateImage(main, str);
+            if (isSuccess) {
+                ConchJNI.RunJS("isSave('1')");
+            } else {
+                ConchJNI.RunJS("isSave('0')");
+            }
         }
     }
 
