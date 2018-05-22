@@ -1,5 +1,11 @@
 package com.mgcz.mgtwo;
 
+import android.content.ComponentName;
+import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Build;
 import android.webkit.JavascriptInterface;
 
@@ -7,6 +13,9 @@ import com.mgcz.mgtwo.util.CheckPermissionUtils;
 import com.mgcz.mgtwo.util.ShareUtil;
 import com.mgcz.mgtwo.util.Util;
 import com.umeng.socialize.bean.SHARE_MEDIA;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import demo.MainActivity;
 import layaair.game.browser.ConchJNI;
@@ -38,6 +47,47 @@ public class AllFunc {
                 ConchJNI.RunJS("isSave('0')");
             }
         }
+    }
+
+    /**
+     * 跳转商城应用
+     */
+    @JavascriptInterface
+    public void intentToShop(){
+        String appPackageName = "com.zsl.dream.fruit";
+        String downloadAppAddress = "http://download.mengguochengzhen.cn/install_mall.html";
+        if (isAvilible(appPackageName)) {
+            Intent intent = new Intent(Intent.ACTION_MAIN);
+            //前提：知道要跳转应用的包名、类名
+            ComponentName componentName = new ComponentName(appPackageName, appPackageName + ".main.StartActivity");
+            intent.setComponent(componentName);
+            main.startActivity(intent);
+        } else {
+            Intent intent = new Intent();
+            intent.setAction("android.intent.action.VIEW");
+            Uri content_url = Uri.parse(downloadAppAddress);
+            intent.setData(content_url);
+            main.startActivity(intent);
+        }
+    }
+
+    /**
+     * 判断应用程序是否已安装
+     * @param packageName
+     * @return
+     */
+    private boolean isAvilible(String packageName){
+        final PackageManager packageManager = main.getPackageManager();//获取packagemanager
+        List<PackageInfo> pinfo = packageManager.getInstalledPackages(0);//获取所有已安装程序的包信息
+        List<String> pName = new ArrayList<String>();//用于存储所有已安装程序的包名
+        //从pinfo中将包名字逐一取出，压入pName list中
+        if(pinfo != null){
+            for(int i = 0; i < pinfo.size(); i++){
+                String pn = pinfo.get(i).packageName;
+                pName.add(pn);
+            }
+        }
+        return pName.contains(packageName);//判断pName中是否有目标程序的包名，有TRUE，没有FALSE
     }
 
 }
