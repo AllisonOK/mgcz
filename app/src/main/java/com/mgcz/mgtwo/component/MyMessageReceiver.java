@@ -1,12 +1,18 @@
 package com.mgcz.mgtwo.component;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.util.Log;
 
 import com.alibaba.sdk.android.push.MessageReceiver;
 import com.alibaba.sdk.android.push.notification.CPushMessage;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.Map;
+
+import layaair.game.browser.ConchJNI;
 
 /**
  * @author: 正纬
@@ -74,6 +80,20 @@ public class MyMessageReceiver extends MessageReceiver {
     @Override
     public void onNotificationOpened(Context context, String title, String summary, String extraMap) {
         Log.i(REC_TAG,"onNotificationOpened ： " + " : " + title + " : " + summary + " : " + extraMap);
+
+        try {
+            JSONObject jsonObject = new JSONObject(extraMap);
+            if (!jsonObject.isNull("sign-notice")) {
+                String value = jsonObject.getString("sign-notice");
+                if (!TextUtils.isEmpty(value)) {
+                    if (value.equals("sign")) {
+                        ConchJNI.RunJS("sign()");
+                    }
+                }
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
     /**

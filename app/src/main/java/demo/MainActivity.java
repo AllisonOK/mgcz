@@ -5,7 +5,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Map;
 
 import layaair.autoupdateversion.AutoUpdateAPK;
 import layaair.game.IMarket.IPlugin;
@@ -16,12 +15,7 @@ import layaair.game.config.config;
 
 import com.kevin.crop.UCrop;
 import com.mgcz.mgtwo.PortraitCropActivity;
-import com.mgcz.mgtwo.R;
-import com.mgcz.mgtwo.util.CheckPermissionUtils;
 import com.mgcz.mgtwo.util.Util;
-import com.umeng.socialize.UMAuthListener;
-import com.umeng.socialize.UMShareAPI;
-import com.umeng.socialize.bean.SHARE_MEDIA;
 import com.yanzhenjie.permission.AndPermission;
 import com.yanzhenjie.permission.PermissionNo;
 import com.yanzhenjie.permission.PermissionYes;
@@ -41,7 +35,6 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
-import android.os.Handler;
 import android.os.Looper;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
@@ -91,7 +84,7 @@ public class MainActivity extends Activity {
         mPlugin.game_plugin_set_runtime_proxy(mProxy);
         mPlugin.game_plugin_set_option("localize", "false");
 //        mPlugin.game_plugin_set_option("gameUrl", "http://dream2test.mengguochengzhen.cn/index.html");
-        mPlugin.game_plugin_set_option("gameUrl", "http://dream2.mengguochengzhen.cn/index.html");
+        mPlugin.game_plugin_set_option("gameUrl", "http://dream2.mengguochengzhen.cn/index.html");//http://10.17.18.20/index/index.html
         mPlugin.game_plugin_init(3);
         View gameView = mPlugin.game_plugin_get_view();
         this.setContentView(gameView);

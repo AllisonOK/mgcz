@@ -39,7 +39,14 @@ public class ShareUtil {
 
                     @Override
                     public void onResult(SHARE_MEDIA share_media) {
-                        ConchJNI.RunJS("isShare('" + "1" + "')");
+                        switch (share_media) {
+                            case WEIXIN:
+                                ConchJNI.RunJS("isShare('" + "1" + "')");
+                                break;
+                            case WEIXIN_CIRCLE:
+                                ConchJNI.RunJS("isShare('" + "2" + "')");
+                                break;
+                        }
                     }
 
                     @Override

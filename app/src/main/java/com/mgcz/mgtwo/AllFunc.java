@@ -57,10 +57,14 @@ public class AllFunc {
         String appPackageName = "com.zsl.dream.fruit";
         String downloadAppAddress = "http://download.mengguochengzhen.cn/install_mall.html";
         if (isAvilible(appPackageName)) {
-            Intent intent = new Intent(Intent.ACTION_MAIN);
-            //前提：知道要跳转应用的包名、类名
-            ComponentName componentName = new ComponentName(appPackageName, appPackageName + ".main.StartActivity");
-            intent.setComponent(componentName);
+            PackageManager packageManager = main.getPackageManager();  // 当前Activity获得packageManager对象
+            Intent intent=new Intent();
+            try {
+                //下面字符串就是你另外一个应用的包的路径
+                intent = packageManager.getLaunchIntentForPackage("com.zsl.dream.fruit");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
             main.startActivity(intent);
         } else {
             Intent intent = new Intent();

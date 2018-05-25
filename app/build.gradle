@@ -10,7 +10,7 @@ android {
         minSdkVersion 14
         targetSdkVersion 26
         versionCode 1
-        versionName "2.1.1"
+        versionName "2.1.2"
     }
     sourceSets.main {
         jniLibs.srcDir 'libs'
@@ -50,5 +50,6 @@ dependencies {
     implementation files('libs/BASE64.jar')
     //6.0以上权限适配
     compile 'com.yanzhenjie:permission:1.0.2'
+    implementation project(':LibMarsdaemon')
 }
 

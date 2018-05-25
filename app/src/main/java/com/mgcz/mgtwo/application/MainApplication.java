@@ -11,20 +11,20 @@ import android.util.Log;
 import com.alibaba.sdk.android.push.CloudPushService;
 import com.alibaba.sdk.android.push.CommonCallback;
 import com.alibaba.sdk.android.push.noonesdk.PushServiceFactory;
-import com.mgcz.mgtwo.util.CheckPermissionUtils;
-import com.mgcz.mgtwo.util.Util;
 import com.umeng.commonsdk.UMConfigure;
 import com.umeng.socialize.PlatformConfig;
-import com.umeng.socialize.UMShareAPI;
 
 import demo.MainActivity;
 
 public class MainApplication extends Application {
     private static final String TAG = "Init";
+    public static Context ctx;
     private static MainActivity mainActivity = null;
+
     @Override
     public void onCreate() {
         super.onCreate();
+        ctx = getApplicationContext();
         initShare();
         initCloudChannel(this);
     }
@@ -33,8 +33,8 @@ public class MainApplication extends Application {
      * 初始化分享
      */
     private void initShare() {
-        UMConfigure.init(this,"wxc9f802f654c05d16"
-                ,"umeng",UMConfigure.DEVICE_TYPE_PHONE,"");
+        UMConfigure.init(this, "wxc9f802f654c05d16"
+                , "umeng", UMConfigure.DEVICE_TYPE_PHONE, "");
     }
 
     {
@@ -43,6 +43,7 @@ public class MainApplication extends Application {
 
     /**
      * 初始化云推送通道
+     *
      * @param applicationContext
      */
     private void initCloudChannel(final Context applicationContext) {
@@ -96,4 +97,5 @@ public class MainApplication extends Application {
             mNotificationManager.createNotificationChannel(mChannel);
         }
     }
+
 }
